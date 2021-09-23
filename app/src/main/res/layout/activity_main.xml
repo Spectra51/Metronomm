@@ -87,16 +87,15 @@
         android:layout_marginStart="102dp"
         android:layout_marginBottom="182dp"
         android:background="@drawable/bigboll"
+        android:drawable="@drawable/btn_play"
         android:state_checked="false"
+        android:textOff=""
+        android:textOn=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.018"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        android:textOff=""
-        android:textOn=""
-        android:drawable="@drawable/btn_play"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
         android:id="@+id/textView3"
