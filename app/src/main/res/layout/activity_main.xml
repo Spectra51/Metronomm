@@ -40,18 +40,15 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="235dp"
-        android:layout_marginBottom="309dp"
         android:text="Metronome"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:typeface="normal"
-        app:layout_constraintBottom_toTopOf="@+id/toggleButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/imageButton11"
         app:layout_constraintHorizontal_bias="0.052"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.022" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <SeekBar
         android:id="@+id/seekBar"
@@ -60,6 +57,7 @@
         android:layout_marginBottom="40dp"
         android:max="240"
         android:min="20"
+        android:progressDrawable="@drawable/seekbar"
         android:progress="50"
         android:thumb="@drawable/smallball"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -77,25 +75,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toggleButton" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ToggleButton
-        android:id="@+id/toggleButton"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginStart="102dp"
-        android:layout_marginBottom="182dp"
+        android:id="@+id/toggleButton2"
+        android:layout_width="221dp"
+        android:layout_height="215dp"
         android:background="@drawable/bigboll"
-        android:drawable="@drawable/btn_play"
-        android:state_checked="false"
-        android:textOff=""
-        android:textOn=""
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="ToggleButton"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.018"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/textView3"
