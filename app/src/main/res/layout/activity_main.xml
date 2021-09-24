@@ -9,7 +9,7 @@
 
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
+        android:id="@+id/linearLayoutFraction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="70dp"
@@ -17,7 +17,7 @@
         android:layout_marginEnd="70dp"
         android:layout_marginBottom="10dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayoutFraction2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.48"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,28 +25,28 @@
         app:layout_constraintVertical_bias="0.333">
 
         <ImageButton
-            android:id="@+id/imageButton132"
+            android:id="@+id/imageButtonFraction0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/cardview_dark_background"
             app:srcCompat="@drawable/rectangle_sv" />
 
         <ImageButton
-            android:id="@+id/imageButton13"
+            android:id="@+id/imageButtonFraction1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/cardview_dark_background"
             app:srcCompat="@drawable/rectangle_sv" />
 
         <ImageButton
-            android:id="@+id/imageButton131"
+            android:id="@+id/imageButtonFraction2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/cardview_dark_background"
             app:srcCompat="@drawable/rectangle_sv" />
 
         <ImageButton
-            android:id="@+id/imageButton1311"
+            android:id="@+id/imageButtonFraction3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/cardview_dark_background"
@@ -55,41 +55,41 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/linearLayoutFraction2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="70dp"
         android:layout_marginEnd="70dp"
         android:layout_marginBottom="40dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        app:layout_constraintBottom_toTopOf="@+id/textViewSize"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.48"
         app:layout_constraintStart_toStartOf="parent">
 
         <ImageButton
-            android:id="@+id/imageButton121"
+            android:id="@+id/imageButtonFraction20"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/cardview_dark_background"
             app:srcCompat="@drawable/rectangle" />
 
         <ImageButton
-            android:id="@+id/imageButton1211"
+            android:id="@+id/imageButtonFraction21"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/cardview_dark_background"
             app:srcCompat="@drawable/rectangle" />
 
         <ImageButton
-            android:id="@+id/imageButton12"
+            android:id="@+id/imageButtonFraction22"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/cardview_dark_background"
             app:srcCompat="@drawable/rectangle" />
 
         <ImageButton
-            android:id="@+id/imageButton122"
+            android:id="@+id/imageButtonFraction23"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/cardview_dark_background"
@@ -99,32 +99,32 @@
     </LinearLayout>
 
     <ImageButton
-        android:id="@+id/imageButton141"
+        android:id="@+id/imageButtonDrawing"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="50dp"
         android:backgroundTint="@color/cardview_dark_background"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton14"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButtonSize"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ball" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageViewDrawingNotes"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="50dp"
         android:layout_marginBottom="50dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton141"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton141"
-        app:layout_constraintStart_toStartOf="@+id/imageButton141"
-        app:layout_constraintTop_toTopOf="@+id/imageButton141"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButtonDrawing"
+        app:layout_constraintEnd_toEndOf="@+id/imageButtonDrawing"
+        app:layout_constraintStart_toStartOf="@+id/imageButtonDrawing"
+        app:layout_constraintTop_toTopOf="@+id/imageButtonDrawing"
         app:layout_constraintVertical_bias="0.532"
         app:srcCompat="@drawable/not" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/imageButtonPlayStop"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="100dp"
@@ -132,16 +132,16 @@
         android:backgroundTint="@color/cardview_dark_background"
         android:padding="30dp"
         android:scaleType="centerCrop"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintBottom_toTopOf="@+id/textViewBeatsPerMinute"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.571"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton141"
+        app:layout_constraintTop_toBottomOf="@+id/imageButtonDrawing"
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/bigboll" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textViewMetronome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
@@ -153,26 +153,26 @@
         android:textColor="@color/white"
         android:textSize="20sp"
         android:typeface="normal"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton11"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayoutFraction"
+        app:layout_constraintEnd_toStartOf="@+id/imageButtonSetting"
         app:layout_constraintHorizontal_bias="0.016"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imageViewPlay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButtonPlayStop"
+        app:layout_constraintEnd_toEndOf="@+id/imageButtonPlayStop"
         app:layout_constraintHorizontal_bias="0.533"
-        app:layout_constraintStart_toStartOf="@+id/imageButton"
-        app:layout_constraintTop_toTopOf="@+id/imageButton"
+        app:layout_constraintStart_toStartOf="@+id/imageButtonPlayStop"
+        app:layout_constraintTop_toTopOf="@+id/imageButtonPlayStop"
         app:srcCompat="@drawable/play" />
 
     <SeekBar
@@ -190,7 +190,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/imageViewPause"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -198,15 +198,15 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton"
-        app:layout_constraintStart_toStartOf="@+id/imageButton"
-        app:layout_constraintTop_toTopOf="@+id/imageButton"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButtonPlayStop"
+        app:layout_constraintEnd_toEndOf="@+id/imageButtonPlayStop"
+        app:layout_constraintStart_toStartOf="@+id/imageButtonPlayStop"
+        app:layout_constraintTop_toTopOf="@+id/imageButtonPlayStop"
         app:layout_constraintVertical_bias="0.514"
         app:srcCompat="@drawable/pause" />
 
     <EditText
-        android:id="@+id/textView2"
+        android:id="@+id/textViewBeatsPerMinute"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/ubuntu"
@@ -219,7 +219,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textViewSize"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/ubuntu"
@@ -227,27 +227,27 @@
         android:text="Размер"
         android:textColor="@color/white"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton14"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton14"
+        app:layout_constraintBottom_toTopOf="@+id/imageButtonSize"
+        app:layout_constraintEnd_toEndOf="@+id/imageButtonSize"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/imageButton14" />
+        app:layout_constraintStart_toStartOf="@+id/imageButtonSize" />
 
     <ImageButton
-        android:id="@+id/imageButton14"
+        android:id="@+id/imageButtonSize"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
-        android:layout_marginEnd="45dp"
+        android:layout_marginEnd="50dp"
         android:layout_marginBottom="250dp"
         android:backgroundTint="@color/cardview_dark_background"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton9"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton141"
+        app:layout_constraintBottom_toTopOf="@+id/imageButtonDown"
+        app:layout_constraintEnd_toStartOf="@+id/imageButtonDrawing"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/ball" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/textViewFractionSize"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -258,15 +258,15 @@
         android:text="2/4"
         android:textColor="@color/white"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton14"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton14"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButtonSize"
+        app:layout_constraintEnd_toEndOf="@+id/imageButtonSize"
         app:layout_constraintHorizontal_bias="0.49"
-        app:layout_constraintStart_toStartOf="@+id/imageButton14"
-        app:layout_constraintTop_toTopOf="@+id/imageButton14"
+        app:layout_constraintStart_toStartOf="@+id/imageButtonSize"
+        app:layout_constraintTop_toTopOf="@+id/imageButtonSize"
         app:layout_constraintVertical_bias="0.475" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/textViewDrawing"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/ubuntu"
@@ -274,15 +274,15 @@
         android:text="Рисунок"
         android:textColor="@color/white"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton141"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton141"
+        app:layout_constraintBottom_toTopOf="@+id/imageButtonDrawing"
+        app:layout_constraintEnd_toEndOf="@+id/imageButtonDrawing"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/imageButton141"
-        app:layout_constraintTop_toTopOf="@+id/textView3"
+        app:layout_constraintStart_toStartOf="@+id/imageButtonDrawing"
+        app:layout_constraintTop_toTopOf="@+id/textViewSize"
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
-        android:id="@+id/imageButton9"
+        android:id="@+id/imageButtonDown"
         android:layout_width="70dp"
         android:layout_height="0dp"
         android:layout_marginStart="15dp"
@@ -296,7 +296,7 @@
         app:srcCompat="@drawable/app" />
 
     <ImageButton
-        android:id="@+id/imageButton10"
+        android:id="@+id/imageButtonApp"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_marginEnd="15dp"
@@ -310,14 +310,14 @@
         app:srcCompat="@drawable/down" />
 
     <ImageButton
-        android:id="@+id/imageButton11"
+        android:id="@+id/imageButtonSetting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="10dp"
         android:backgroundTint="@color/cardview_dark_background"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayoutFraction"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
