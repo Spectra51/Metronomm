@@ -9,13 +9,18 @@ import org.w3c.dom.Text
 
 class MainActivity : AppCompatActivity() {
 
+   lateinit var param: String
     var imageButtonSize: ImageButton = findViewById(R.id.imageButtonSize)
+    var textViewFractionSize: TextView = findViewById(R.id.textViewFractionSize)
+    var txt_2: TextView = findViewById(R.id.txt_2)
+    var txt_3: TextView = findViewById(R.id.txt_3)
+    var txt_4: TextView = findViewById(R.id.txt_4)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         imageButtonSize?.setOnClickListener {
-            size()
+            size(param)
             supportFragmentManager.let {
                 SizeOptionsBottomSheetFragment.newInstance(Bundle()).apply {
                     show(it, tag)
@@ -40,14 +45,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun size() {
-        var sizeclk: String
-        var textViewFractionSize: TextView = findViewById(R.id.textViewFractionSize)
-        var txt_2: TextView = findViewById(R.id.txt_2)
-        var txt_3: TextView = findViewById(R.id.txt_3)
-        var txt_4: TextView = findViewById(R.id.txt_4)
-        //   sizeclk =
-        when (sizeclk) {
+    fun size(param:String) {
+        when (param) {
             txt_2.toString() -> textViewFractionSize.text = "2/4"
             txt_3.toString() -> textViewFractionSize.text = "3/4"
             txt_4.toString() -> textViewFractionSize.text = "4/4"
