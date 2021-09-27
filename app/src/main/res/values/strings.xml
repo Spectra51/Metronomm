@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">Metronom</string>
-
+    <string name="drawing"><u>Рисунок</u></string>
 </resources>
