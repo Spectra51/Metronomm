@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Metronom</string>
+    <string name="x2">восьмая</string>
+    <string name="x4">шестнадцатая</string>
 </resources>
