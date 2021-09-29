@@ -13,10 +13,10 @@
 
     <ScrollView
         android:id="@+id/scrollView3"
-        android:layout_width="91dp"
-        android:layout_height="235dp"
+        android:layout_width="35dp"
+        android:layout_height="30dp"
         android:layout_marginTop="30dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="50dp"
         android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,8 +24,9 @@
         app:layout_constraintTop_toBottomOf="@+id/view2">
 
         <LinearLayout
+            android:id="@+id/linearLayoutDrawing"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:gravity="center"
             android:orientation="vertical"
             app:layout_behavior="android.support.design.widget.BottomSheetBehavior"
@@ -36,7 +37,7 @@
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:paddingBottom="20dp"
                 android:scrollbars="vertical"
@@ -52,8 +53,8 @@
             <ImageView
                 android:id="@+id/imageView3"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:paddingBottom="20dp"
+                android:layout_height="30dp"
+                android:cropToPadding="false"
                 app:srcCompat="@drawable/note3" />
 
         </LinearLayout>
