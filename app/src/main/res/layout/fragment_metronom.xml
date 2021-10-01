@@ -132,7 +132,7 @@
         android:backgroundTint="@color/cardview_dark_background"
         android:padding="30dp"
         android:scaleType="centerCrop"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintBottom_toTopOf="@+id/editTextBpm"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.571"
         app:layout_constraintStart_toStartOf="parent"
@@ -141,7 +141,7 @@
         app:srcCompat="@drawable/bigboll" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textViewMetronome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
@@ -161,13 +161,14 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imageViewPlay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/imageButton"
         app:layout_constraintEnd_toEndOf="@+id/imageButton"
         app:layout_constraintHorizontal_bias="0.533"
@@ -175,22 +176,25 @@
         app:layout_constraintTop_toTopOf="@+id/imageButton"
         app:srcCompat="@drawable/play" />
 
+
     <SeekBar
-        android:id="@+id/seekBar"
+        android:id="@+id/seekBarBpm"
         android:layout_width="255dp"
         android:layout_height="62dp"
         android:layout_marginBottom="15dp"
-        android:max="240"
-        android:min="20"
-        android:progress="50"
-        android:progressDrawable="@drawable/seekbar"
-        android:thumb="@drawable/smallball"
+        android:max="220"
+        android:min="0"
+        android:progress="110"
+        android:thumb="@drawable/seek_thumb"
+        android:indeterminate="false"
+        android:progressDrawable="@drawable/seek_progress"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/imageViewPause"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -206,14 +210,16 @@
         app:srcCompat="@drawable/pause" />
 
     <EditText
-        android:id="@+id/textView2"
+        android:id="@+id/editTextBpm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/ubuntu"
-        android:text="80"
+        android:inputType="textPersonName|numberDecimal"
+        android:maxLength="3"
+        android:text="130"
         android:textColor="@color/white"
         android:textSize="40sp"
-        app:layout_constraintBottom_toTopOf="@+id/seekBar"
+        app:layout_constraintBottom_toTopOf="@+id/seekBarBpm"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent" />
@@ -240,7 +246,7 @@
         android:layout_marginEnd="45dp"
         android:layout_marginBottom="250dp"
         android:backgroundTint="@color/cardview_dark_background"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton9"
+        app:layout_constraintBottom_toTopOf="@+id/buttonDown"
         app:layout_constraintEnd_toStartOf="@+id/imageButton141"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -282,7 +288,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
-        android:id="@+id/imageButton9"
+        android:id="@+id/buttonDown"
         android:layout_width="70dp"
         android:layout_height="0dp"
         android:layout_marginStart="15dp"
@@ -290,13 +296,13 @@
         android:backgroundTint="@color/cardview_dark_background"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/seekBar"
+        app:layout_constraintEnd_toStartOf="@+id/seekBarBpm"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/seekBar"
+        app:layout_constraintTop_toTopOf="@+id/seekBarBpm"
         app:srcCompat="@drawable/app" />
 
     <ImageButton
-        android:id="@+id/imageButton10"
+        android:id="@+id/buttonUp"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_marginEnd="15dp"
@@ -305,8 +311,8 @@
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/seekBar"
-        app:layout_constraintTop_toTopOf="@+id/seekBar"
+        app:layout_constraintStart_toEndOf="@+id/seekBarBpm"
+        app:layout_constraintTop_toTopOf="@+id/seekBarBpm"
         app:srcCompat="@drawable/down" />
 
     <ImageButton
