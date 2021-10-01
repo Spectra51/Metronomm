@@ -9,91 +9,75 @@
 
 
     <LinearLayout
-        android:id="@+id/linearLayoutFraction"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/linearLayoutFraction2"
+        android:layout_width="252dp"
+        android:layout_height="91dp"
         android:layout_marginStart="70dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="70dp"
-        android:layout_marginBottom="7dp"
+        android:layout_marginBottom="40dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayoutFraction2"
+        app:layout_constraintBottom_toTopOf="@+id/textViewSize"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.48"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.333">
-
-        <ImageButton
-            android:id="@+id/imageButtonFraction0"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/cardview_dark_background"
-            app:srcCompat="@drawable/rectangle_sv" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewMetronome">
 
         <ImageButton
             android:id="@+id/imageButtonFraction1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:backgroundTint="@color/cardview_dark_background"
-            app:srcCompat="@drawable/rectangle_sv" />
+            android:padding="5dp"
+            android:paddingStart="5dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="5dp"
+            android:paddingRight="5dp"
+            android:paddingBottom="5dp"
+            app:srcCompat="@drawable/rec1" />
 
         <ImageButton
             android:id="@+id/imageButtonFraction2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/cardview_dark_background"
-            app:srcCompat="@drawable/rectangle_sv" />
+            android:padding="5dp"
+            android:paddingStart="5dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="5dp"
+            android:paddingRight="5dp"
+            android:paddingBottom="5dp"
+            app:srcCompat="@drawable/rec2" />
 
         <ImageButton
             android:id="@+id/imageButtonFraction3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/cardview_dark_background"
-            app:srcCompat="@drawable/rectangle_sv" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayoutFraction2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="70dp"
-        android:layout_marginEnd="70dp"
-        android:layout_marginBottom="40dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/textViewSize"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.48"
-        app:layout_constraintStart_toStartOf="parent">
+            android:padding="5dp"
+            android:paddingStart="5dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="5dp"
+            android:paddingRight="5dp"
+            android:paddingBottom="5dp"
+            app:srcCompat="@drawable/rec2" />
 
         <ImageButton
-            android:id="@+id/imageButtonFraction20"
+            android:id="@+id/imageButtonFraction4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/cardview_dark_background"
-            app:srcCompat="@drawable/rectangle" />
-
-        <ImageButton
-            android:id="@+id/imageButtonFraction21"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/cardview_dark_background"
-            app:srcCompat="@drawable/rectangle" />
-
-        <ImageButton
-            android:id="@+id/imageButtonFraction22"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/cardview_dark_background"
-            app:srcCompat="@drawable/rectangle" />
-
-        <ImageButton
-            android:id="@+id/imageButtonFraction23"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/cardview_dark_background"
-            app:srcCompat="@drawable/rectangle" />
+            android:padding="5dp"
+            android:paddingStart="5dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="5dp"
+            android:paddingRight="5dp"
+            android:paddingBottom="5dp"
+            app:srcCompat="@drawable/rec2" />
 
 
     </LinearLayout>
@@ -147,18 +131,15 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="200dp"
-        android:layout_marginBottom="10dp"
         android:fontFamily="@font/ubuntu"
         android:text="Metronome"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:typeface="normal"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayoutFraction"
         app:layout_constraintEnd_toStartOf="@+id/imageButtonSetting"
         app:layout_constraintHorizontal_bias="0.016"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageViewPlay"
@@ -324,12 +305,9 @@
         android:layout_height="34dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="10dp"
         android:backgroundTint="@color/cardview_dark_background"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayoutFraction"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/setting" />
 
 
