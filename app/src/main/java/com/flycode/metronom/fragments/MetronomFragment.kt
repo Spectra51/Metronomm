@@ -50,7 +50,7 @@ class MetronomFragment: MvpAppCompatFragment(R.layout.fragment_metronom), Metron
     lateinit var seekBarBpm: SeekBar
     lateinit var handler: Handler
 
-    @SuppressLint("ClickableViewAccessibility")
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -69,33 +69,13 @@ class MetronomFragment: MvpAppCompatFragment(R.layout.fragment_metronom), Metron
 
         // Ставим прослушиватель на editTextBpm, чтобы bpm изменялся при изменении поля editTextBpm
         editTextBpm.addTextChangedListener {
-            seekBarBpm.setProgress(getCurrentBpm()- MIN_BPM)
-            if ((!imageViewPlay.isVisible && !isTapping) || (!imageViewPlay.isVisible && getCurrentBpm()==240) || (!imageViewPlay.isVisible && getCurrentBpm()==20)){
-                presenter.pauseMetronom()
-                val bpm = getCurrentBpm()
-                presenter.playMetronom(bpm)
-            }
-
-
+            seekBarBpm.setProgress(presenter.getCurrentBpm(editTextBpm)- MIN_BPM)
+            presenter.metronomDependEditText(imageViewPlay.isVisible, editTextBpm, isTapping)
         }
 
         // Ставим прослушиватель на кнопку Play для запуска метронома
         imageViewPlay.setOnClickListener {
-            if (editTextBpm.text.isNotEmpty()) {
-                val bpm = editTextBpm.text.toString().toInt()
-                if(bpm < MIN_BPM){
-                    Toast.makeText(requireContext(), "Значение не может быть меньше 20", Toast.LENGTH_SHORT).show()
-                    editTextBpm.setText(MIN_BPM.toString())
-                } else if( bpm > MAX_BPM){
-                    Toast.makeText(requireContext(), "Значение не может быть больше 240", Toast.LENGTH_SHORT).show()
-                    editTextBpm.setText(MAX_BPM.toString())
-                } else{
-                    presenter.playMetronom(bpm)
-                }
-            } else {
-                Toast.makeText(requireContext(), "Значение не может быть пустым", Toast.LENGTH_SHORT).show()
-            }
-
+            presenter.tapPlayButton(editTextBpm)
         }
         // Ставим прослушиватель на кнопку Pause для паузы метронома
         imageViewPause.setOnClickListener {
@@ -103,7 +83,7 @@ class MetronomFragment: MvpAppCompatFragment(R.layout.fragment_metronom), Metron
         }
 
         // Слушатели для длительного нажатия на кнопку Увеличить bpm
-        buttonUp.setOnClickListener { updateBpm(true) }
+        buttonUp.setOnClickListener { presenter.updateBpm(true, editTextBpm) }
         buttonUp.setOnLongClickListener {
             isTapping = true
             autoUp = true
@@ -121,7 +101,7 @@ class MetronomFragment: MvpAppCompatFragment(R.layout.fragment_metronom), Metron
         }
 
         // Слушатели для длительного нажатия на кнопку Уменьшить bpm
-        buttonDown.setOnClickListener{updateBpm(false)}
+        buttonDown.setOnClickListener{presenter.updateBpm(false, editTextBpm)}
         buttonDown.setOnLongClickListener {
             isTapping = true
             autoDown = true
@@ -137,6 +117,7 @@ class MetronomFragment: MvpAppCompatFragment(R.layout.fragment_metronom), Metron
             }
             false
         }
+
 
         // Слушатель для seekbar
         seekBarBpm.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
@@ -155,11 +136,9 @@ class MetronomFragment: MvpAppCompatFragment(R.layout.fragment_metronom), Metron
                 if (seekBar != null) {
                     editTextBpm.setText((seekBar.progress+ MIN_BPM).toString())
                 }
-
             }
 
         })
-
 
     }
 
@@ -167,16 +146,17 @@ class MetronomFragment: MvpAppCompatFragment(R.layout.fragment_metronom), Metron
     inner class bpmUpdater : Runnable {
         override fun run() {
             if (autoUp) {
-                updateBpm(true)
+                presenter.updateBpm(true, editTextBpm)
                 handler.postDelayed(bpmUpdater(), 50L)
             } else if (autoDown) {
-                updateBpm(false)
+                presenter.updateBpm(false, editTextBpm)
                 handler.postDelayed(bpmUpdater(), 50L)
             }
         }
     }
 
 
+    // МЕТОДЫ VIEW
     override fun isPlaying() {
         imageViewPlay.isVisible = false
         imageViewPause.isVisible = true
@@ -187,29 +167,13 @@ class MetronomFragment: MvpAppCompatFragment(R.layout.fragment_metronom), Metron
         imageViewPause.isVisible = false
     }
 
-    // Метод для обновления значений в поле editTextBpm по нажатию на кнопки Увеличить bpm и Уменьшить bpm
-    private fun updateBpm (increase: Boolean){
-
-        val currentBpm = getCurrentBpm()
-        val newBpm = if (increase) currentBpm + 1 else currentBpm - 1
-        val allowUpdate = if (increase) newBpm <= MAX_BPM else newBpm >= MIN_BPM
-        if (allowUpdate) {
-            editTextBpm.setText(newBpm.toString())
-        }
-
+    override fun setEditTextBpm(bpm: Int) {
+        editTextBpm.setText(bpm.toString())
     }
 
-    // Метод для получения bpm из поля editTextBpm
-    private fun getCurrentBpm(): Int {
-        return if (editTextBpm.text.isNotEmpty()) {
-            editTextBpm.text.toString().toInt()
-        } else {
-            MIN_BPM
-        }
+    override fun showToast(toast: String) {
+        Toast.makeText(requireContext(), toast, Toast.LENGTH_SHORT).show()
     }
-
-
-
 }
 
 

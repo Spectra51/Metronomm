@@ -8,4 +8,8 @@ interface MetronomView : MvpView {
     fun isPlaying()
     @AddToEndSingle
     fun isPausing()
+    @AddToEndSingle
+    fun showToast(toast: String)
+    @AddToEndSingle
+    fun setEditTextBpm(bpm: Int)
 }
