@@ -2,6 +2,7 @@ package com.flycode.metronom
 
 import android.app.ProgressDialog.show
 import android.content.Intent
+import android.graphics.drawable.Drawable
 import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,11 +13,13 @@ import android.view.ViewTreeObserver
 import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.graphics.drawable.toDrawable
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import org.w3c.dom.Text
 import java.util.*
 import kotlin.properties.Delegates
+import kotlin.random.Random.Default.nextInt
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,24 +29,20 @@ class MainActivity : AppCompatActivity() {
     var linearLayoutDrawing: LinearLayout? = null
     var imageButtonSize: ImageButton? = null
     var imageButtonDrawing: ImageButton? = null
-    var scrollView2: ScrollView? = null
-    var txt_2: TextView? = null
-    var txt_3: TextView? = null
-    var txt_4: TextView? = null
     var imageButtonSetting: ImageButton? = null
-    var txt_double4: TextView? = null
     var imageButtonFraction4: ImageButton? = null
     var imageButtonFraction1: ImageButton? = null
     var imageButtonFraction2: ImageButton? = null
     var imageButtonFraction3: ImageButton? = null
-    var dd: Array<Image>? = null
-
+var flag: Boolean? = null
+var flag2: Boolean? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         textViewFractionSizeMain = findViewById(R.id.textViewFractionSize)
-        var ss: Boolean? = null
+        flag = true
+        flag2 = false
 
         //вызов всплывающего экрана с размером
         imageButtonSize = findViewById(R.id.imageButtonSize)
@@ -94,82 +93,64 @@ class MainActivity : AppCompatActivity() {
         imageButtonFraction2 = findViewById(R.id.imageButtonFraction2)
         imageButtonFraction3 = findViewById(R.id.imageButtonFraction3)
 
+        imageButtonFraction1?.setOnClickListener {
+
+            if (flag!!) {
+                imageButtonFraction1!!.setImageResource(R.drawable.rec1)
+                flag = false
+                flag2 = false
+            }else if (flag2!!){
+                imageButtonFraction1!!.setImageResource(R.drawable.rec3)
+                flag = true }
+            else{
+                imageButtonFraction1!!.setImageResource(R.drawable.rec2)
+                flag2 = true
+            }
+        }
 
 
 
+        imageButtonFraction2?.setOnClickListener {
+            if (flag!!) {
+                imageButtonFraction2!!.setImageResource(R.drawable.rec1)
+                flag = false
+                flag2 = false
+            }else if (flag2!!){
+                imageButtonFraction2!!.setImageResource(R.drawable.rec3)
+                flag = true }
+            else{
+                imageButtonFraction2!!.setImageResource(R.drawable.rec2)
+                flag2 = true
+            }
+        }
 
+        imageButtonFraction3?.setOnClickListener {
+            if (flag!!) {
+                imageButtonFraction3!!.setImageResource(R.drawable.rec1)
+                flag = false
+                flag2 = false
+            }else if (flag2!!){
+                imageButtonFraction3!!.setImageResource(R.drawable.rec3)
+                flag = true }
+            else{
+                imageButtonFraction3!!.setImageResource(R.drawable.rec2)
+                flag2 = true
+            }
+        }
 
-
-        /* imageButtonFraction1?.setOnClickListener {
-             if (flag){
-                 imageButtonFraction1!!.setImageResource(R.drawable.rectangle_sv)
-                 flag = false
-             }else{
-                 imageButtonFraction1!!.setImageResource(R.drawable.rectangle)
-                 flag = true
-             }
-         }
-
-         imageButtonFraction2?.setOnClickListener {
-             if (flag){
-                 imageButtonFraction2!!.setImageResource(R.drawable.rectangle_sv)
-                 flag = false
-             }else{
-                 imageButtonFraction2!!.setImageResource(R.drawable.rectangle)
-                 flag = true
-             }
-         }
-
-         imageButtonFraction3?.setOnClickListener {
-             if (flag){
-                 imageButtonFraction3!!.setImageResource(R.drawable.rectangle_sv)
-                 flag = false
-             }else{
-                 imageButtonFraction3!!.setImageResource(R.drawable.rectangle)
-                 flag = true
-             }
-         }
-
-         imageButtonFraction20?.setOnClickListener {
-             if (flag){
-                 imageButtonFraction20!!.setImageResource(R.drawable.rectangle_sv)
-                 flag = false
-             }else{
-                 imageButtonFraction20!!.setImageResource(R.drawable.rectangle)
-                 flag = true
-             }
-         }
-
-         imageButtonFraction21?.setOnClickListener {
-             if (flag){
-                 imageButtonFraction21!!.setImageResource(R.drawable.rectangle_sv)
-                 flag = false
-             }else{
-                 imageButtonFraction21!!.setImageResource(R.drawable.rectangle)
-                 flag = true
-             }
-         }
-
-         imageButtonFraction22?.setOnClickListener {
-             if (flag){
-                 imageButtonFraction22!!.setImageResource(R.drawable.rectangle_sv)
-                 flag = false
-             }else{
-                 imageButtonFraction22!!.setImageResource(R.drawable.rectangle)
-                 flag = true
-             }
-         }
-
-         imageButtonFraction23?.setOnClickListener {
-             if (flag){
-                 imageButtonFraction23!!.setImageResource(R.drawable.rectangle_sv)
-                 flag = false
-             }else{
-                 imageButtonFraction23!!.setImageResource(R.drawable.rectangle)
-                 flag = true
-             }
-         }*/
-
+        imageButtonFraction4?.setOnClickListener {
+            if (flag!!) {
+                imageButtonFraction4!!.setImageResource(R.drawable.rec1)
+                flag = false
+                flag2 = false
+            } else if (flag2!!) {
+                imageButtonFraction4!!.setImageResource(R.drawable.rec3)
+                flag = true
+            } else {
+                imageButtonFraction4!!.setImageResource(R.drawable.rec2)
+                flag2 = true
+            }
+        }
     }
 
 
