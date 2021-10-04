@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ScrollView
 import android.widget.TextView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -18,6 +19,8 @@ class SizeBottomSheetDialog : BottomSheetDialogFragment(){
     var txt_2: TextView? = null
     var txt_3: TextView? = null
     var txt_4: TextView? = null
+    var imageButtonFraction4: ImageButton? = null
+    var imageButtonFraction3: ImageButton? = null
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -32,14 +35,20 @@ class SizeBottomSheetDialog : BottomSheetDialogFragment(){
         txt_2?.setOnClickListener {
             textViewFractionSize = "2/4"
             this.startActivity(Intent(requireContext(), MainActivity::class.java))
+            imageButtonFraction4?.visibility = View.GONE
+            imageButtonFraction3?.visibility = View.GONE
         }
 
         txt_3?.setOnClickListener {
             textViewFractionSize = "3/4"
+            this.startActivity(Intent(requireContext(), MainActivity::class.java))
+            imageButtonFraction4?.visibility = View.GONE
         }
 
         txt_4?.setOnClickListener {
             textViewFractionSize = "4/4"
+            this.startActivity(Intent(requireContext(), MainActivity::class.java))
+
         }
     }
 
