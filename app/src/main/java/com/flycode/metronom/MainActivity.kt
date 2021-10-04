@@ -95,25 +95,6 @@ class MainActivity : AppCompatActivity() {
         imageButtonFraction3 = findViewById(R.id.imageButtonFraction3)
 
 
-         ss = false
-        imageButtonFraction1?.setOnClickListener {
-
-            if (ss!!){
-                imageButtonFraction1!!.setImageResource(R.drawable.rec1)
-                ss = false
-            }else{
-                imageButtonFraction1!!.setImageResource(R.drawable.rec2)
-                ss = true
-            }
-
-            if (ss!!){
-                imageButtonFraction1!!.setImageResource(R.drawable.rec3)
-                ss = false
-            }else{
-                imageButtonFraction1!!.setImageResource(R.drawable.rec1)
-                ss = true
-            }
-        }
 
 
 
