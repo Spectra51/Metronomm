@@ -19,6 +19,8 @@ import androidx.navigation.fragment.findNavController
 import com.flycode.metronom.R
 import com.flycode.metronom.fragments.MetronomFragment.const.MAX_BPM
 import com.flycode.metronom.fragments.MetronomFragment.const.MIN_BPM
+import com.flycode.metronom.fragments.SheetDrawingFragment.Companion.drawingKey
+import com.flycode.metronom.fragments.SheetSizeFragment.Companion.addDrawingKey
 import com.flycode.metronom.model.Metronom
 import com.flycode.metronom.presenters.MetronomPresenter
 import com.flycode.metronom.views.MetronomView
@@ -77,6 +79,12 @@ class MetronomFragment: MvpAppCompatFragment(R.layout.fragment_metronom), Metron
         textViewFractionSize = view.findViewById(R.id.textViewFractionSize)
         imageViewDrawingNotes = view.findViewById(R.id.imageViewDrawingNotes)
 
+        //Используем liveData, что бы подписаться на изменения аргумента
+        findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<Int>(drawingKey)
+            ?.observe(viewLifecycleOwner) {
+                //действие при изменение аргумента
+                imageViewDrawingNotes.setImageResource(it)
+            }
 
         if (arguments?.getString(SheetSizeFragment.sizeKey) != null){ // чтобы при первом запуске были значения по-умолчанию
             textViewFractionSize.text = arguments?.getString(SheetSizeFragment.sizeKey) // установка значения из нижнего окна в главный макет

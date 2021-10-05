@@ -37,18 +37,31 @@ class SheetDrawingFragment: BottomSheetDialogFragment() {
         val size = arguments?.getString(addSizeKey).toString()
 
         imageViewNote1.setOnClickListener {
-            findNavController().navigate(R.id.action_sheetDrawingFragment_to_metronomFragment,
-            bundleOf(drawingKey to R.drawable.note11, addSizeKey to size))
+            //получаем предыдущий фрагментв стеке
+            // берем обработчик его состояни и меняет его значение под выбранным ключем ключ
+            // (в том фрагменте данные поменются даже если не вызвать findNavController().popBackStack())
+            // для наглядности только тут не вызываем его
+            findNavController().previousBackStackEntry?.savedStateHandle?.apply {
+                this.set(drawingKey,R.drawable.note11)
+                this.set(addSizeKey,size)
+            }
+//            findNavController().popBackStack()
         }
 
         imageViewNote2.setOnClickListener {
-            findNavController().navigate(R.id.action_sheetDrawingFragment_to_metronomFragment,
-                bundleOf(drawingKey to R.drawable.note22, addSizeKey to size))
+            findNavController().previousBackStackEntry?.savedStateHandle?.apply {
+                this.set(drawingKey,R.drawable.note22)
+                this.set(addSizeKey,size)
+            }
+            findNavController().popBackStack()
         }
 
         imageViewNote3.setOnClickListener {
-            findNavController().navigate(R.id.action_sheetDrawingFragment_to_metronomFragment,
-                bundleOf(drawingKey to R.drawable.note33, addSizeKey to size))
+            findNavController().previousBackStackEntry?.savedStateHandle?.apply {
+                this.set(drawingKey,R.drawable.note33)
+                this.set(addSizeKey,size)
+            }
+            findNavController().popBackStack()
         }
     }
 }
