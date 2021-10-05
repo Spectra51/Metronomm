@@ -7,5 +7,28 @@
     <fragment
         android:id="@+id/metronomFragment"
         android:name="com.flycode.metronom.fragments.MetronomFragment"
-        android:label="MetronomFragment" />
+        android:label="MetronomFragment" >
+        <action
+            android:id="@+id/action_metronomFragment_to_sheetSizeFragment"
+            app:destination="@id/sheetSizeFragment" />
+        <action
+            android:id="@+id/action_metronomFragment_to_sheetDrawingFragment"
+            app:destination="@id/sheetDrawingFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/sheetSizeFragment"
+        android:name="com.flycode.metronom.fragments.SheetSizeFragment"
+        android:label="SheetSizeFragment" >
+        <action
+            android:id="@+id/action_sheetSizeFragment_to_metronomFragment"
+            app:destination="@id/metronomFragment" />
+    </dialog>
+    <dialog
+        android:id="@+id/sheetDrawingFragment"
+        android:name="com.flycode.metronom.fragments.SheetDrawingFragment"
+        android:label="SheetDrawingFragment" >
+        <action
+            android:id="@+id/action_sheetDrawingFragment_to_metronomFragment"
+            app:destination="@id/metronomFragment" />
+    </dialog>
 </navigation>

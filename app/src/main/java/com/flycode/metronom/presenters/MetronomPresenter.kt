@@ -32,9 +32,9 @@ class MetronomPresenter: MvpPresenter<MetronomView>() {
     }
 
     // Метод при нажатии кнопки Play
-    fun tapPlayButton(editTextBpm: EditText){
-        if (editTextBpm.text.isNotEmpty()) {
-            val bpm = editTextBpm.text.toString().toInt()
+    fun tapPlayButton(textBpm: String){
+        if (textBpm.isNotEmpty()) {
+            val bpm = textBpm.toInt()
             if(bpm < MetronomFragment.const.MIN_BPM){
                 viewState.showToast("Значение не может быть меньше 20")
                 viewState.setEditTextBpm(MetronomFragment.const.MIN_BPM)
@@ -50,9 +50,9 @@ class MetronomPresenter: MvpPresenter<MetronomView>() {
     }
 
     // Метод для получения bpm из поля editTextBpm
-    fun getCurrentBpm(editTextBpm: EditText): Int {
-        if (editTextBpm.text.isNotEmpty()) {
-            val bpm = editTextBpm.text.toString().toInt()
+    fun getCurrentBpm(textBpm: String): Int {
+        if (textBpm.isNotEmpty()) {
+            val bpm = textBpm.toInt()
             if (bpm > MetronomFragment.const.MAX_BPM){
                 return MetronomFragment.const.MAX_BPM
             } else if(bpm < MetronomFragment.const.MIN_BPM){
@@ -66,8 +66,8 @@ class MetronomPresenter: MvpPresenter<MetronomView>() {
     }
 
     // Метод для обновления значений в поле editTextBpm по нажатию на кнопки Увеличить bpm и Уменьшить bpm
-    fun updateBpm (increase: Boolean, editTextBpm: EditText){
-        val currentBpm = getCurrentBpm(editTextBpm)
+    fun updateBpm (increase: Boolean, textBpm: String){
+        val currentBpm = getCurrentBpm(textBpm)
         val newBpm = if (increase) currentBpm + 1 else currentBpm - 1
         val allowUpdate = if (increase) newBpm <= MetronomFragment.const.MAX_BPM else newBpm >= MetronomFragment.const.MIN_BPM
         if (allowUpdate) {
@@ -75,11 +75,11 @@ class MetronomPresenter: MvpPresenter<MetronomView>() {
         }
     }
 
-    fun metronomDependEditText(imageViewPlayVisible: Boolean, editTextBpm: EditText, isTapping: Boolean){
-        if ((!imageViewPlayVisible && !isTapping) || (!imageViewPlayVisible && getCurrentBpm(editTextBpm)== MetronomFragment.const.MAX_BPM) ||
-            (!imageViewPlayVisible && getCurrentBpm(editTextBpm)== MetronomFragment.const.MIN_BPM)){
+    fun metronomDependEditText(imageViewPlayVisible: Boolean, textBpm: String, isTapping: Boolean){
+        if ((!imageViewPlayVisible && !isTapping) || (!imageViewPlayVisible && getCurrentBpm(textBpm)== MetronomFragment.const.MAX_BPM) ||
+            (!imageViewPlayVisible && getCurrentBpm(textBpm)== MetronomFragment.const.MIN_BPM)){
             pauseMetronom()
-            val bpm = getCurrentBpm(editTextBpm)
+            val bpm = getCurrentBpm(textBpm)
             playMetronom(bpm)
         }
     }

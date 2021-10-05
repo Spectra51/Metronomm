@@ -93,7 +93,7 @@
         app:srcCompat="@drawable/ball" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageViewDrawingNotes"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="50dp"
@@ -105,7 +105,7 @@
         app:layout_constraintStart_toStartOf="@+id/imageButtonDrawing"
         app:layout_constraintTop_toTopOf="@+id/imageButtonDrawing"
         app:layout_constraintVertical_bias="0.532"
-        app:srcCompat="@drawable/not" />
+        app:srcCompat="@drawable/note11" />
 
     <ImageButton
         android:id="@+id/imageButton"
@@ -237,7 +237,7 @@
         app:srcCompat="@drawable/ball" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/textViewFractionSize"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"

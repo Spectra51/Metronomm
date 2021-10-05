@@ -9,9 +9,13 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.widget.*
+import androidx.core.content.res.TypedArrayUtils.getDrawable
+import androidx.core.graphics.drawable.toDrawable
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.core.view.postDelayed
 import androidx.core.widget.addTextChangedListener
+import androidx.navigation.fragment.findNavController
 import com.flycode.metronom.R
 import com.flycode.metronom.fragments.MetronomFragment.const.MAX_BPM
 import com.flycode.metronom.fragments.MetronomFragment.const.MIN_BPM
@@ -48,6 +52,11 @@ class MetronomFragment: MvpAppCompatFragment(R.layout.fragment_metronom), Metron
     lateinit var buttonDown: ImageButton
     lateinit var textViewMetronome: TextView
     lateinit var seekBarBpm: SeekBar
+    lateinit var imageButtonSize: ImageButton
+    lateinit var imageButtonDrawing: ImageButton
+    lateinit var textViewFractionSize: TextView
+    lateinit var imageViewDrawingNotes: ImageView
+
     lateinit var handler: Handler
 
 
@@ -61,21 +70,48 @@ class MetronomFragment: MvpAppCompatFragment(R.layout.fragment_metronom), Metron
         buttonDown = view.findViewById(R.id.buttonDown)
         textViewMetronome = view.findViewById(R.id.textViewMetronome)
         seekBarBpm = view.findViewById(R.id.seekBarBpm)
+        imageButtonSize = view.findViewById(R.id.imageButtonSize)
+        imageButtonDrawing = view.findViewById(R.id.imageButtonDrawing)
+
+        //
+        textViewFractionSize = view.findViewById(R.id.textViewFractionSize)
+        imageViewDrawingNotes = view.findViewById(R.id.imageViewDrawingNotes)
+
+
+        if (arguments?.getString(SheetSizeFragment.sizeKey) != null){ // чтобы при первом запуске были значения по-умолчанию
+            textViewFractionSize.text = arguments?.getString(SheetSizeFragment.sizeKey) // установка значения из нижнего окна в главный макет
+            arguments?.getInt(SheetSizeFragment.addDrawingKey)?.let {
+                imageViewDrawingNotes.setImageResource(it)
+            }
+            Log.i("My", "SIZE, ${arguments?.getInt(SheetSizeFragment.addDrawingKey)}" )
+        }
+
+        if (arguments?.getInt(SheetDrawingFragment.drawingKey) != null && arguments?.getString(SheetSizeFragment.sizeKey) == null){
+            arguments?.getInt(SheetDrawingFragment.drawingKey)?.let {
+                imageViewDrawingNotes.setImageResource(it)
+            }
+            textViewFractionSize.text = arguments?.getString(SheetDrawingFragment.addSizeKey)
+            Log.i("My", "DRAWING")
+        }
+        //
+
 
         // Создаём таймер и soundPool
         presenter.createSoundTimer(requireContext())
-        // Создаём Handler
+        // Создаём Handler для долгого нажатия по кнопкам Увеличить bpm и Уменьшить bpm
         handler = Handler(Looper.getMainLooper())
 
         // Ставим прослушиватель на editTextBpm, чтобы bpm изменялся при изменении поля editTextBpm
         editTextBpm.addTextChangedListener {
-            seekBarBpm.setProgress(presenter.getCurrentBpm(editTextBpm)- MIN_BPM)
-            presenter.metronomDependEditText(imageViewPlay.isVisible, editTextBpm, isTapping)
+            val textBpm = editTextBpm.text.toString()
+            seekBarBpm.setProgress(presenter.getCurrentBpm(textBpm)- MIN_BPM)
+            presenter.metronomDependEditText(imageViewPlay.isVisible, textBpm, isTapping)
         }
 
         // Ставим прослушиватель на кнопку Play для запуска метронома
         imageViewPlay.setOnClickListener {
-            presenter.tapPlayButton(editTextBpm)
+            val textBpm=  editTextBpm.text.toString()
+            presenter.tapPlayButton(textBpm)
         }
         // Ставим прослушиватель на кнопку Pause для паузы метронома
         imageViewPause.setOnClickListener {
@@ -83,7 +119,9 @@ class MetronomFragment: MvpAppCompatFragment(R.layout.fragment_metronom), Metron
         }
 
         // Слушатели для длительного нажатия на кнопку Увеличить bpm
-        buttonUp.setOnClickListener { presenter.updateBpm(true, editTextBpm) }
+        buttonUp.setOnClickListener {
+            presenter.updateBpm(true, editTextBpm.text.toString())
+        }
         buttonUp.setOnLongClickListener {
             isTapping = true
             autoUp = true
@@ -101,7 +139,9 @@ class MetronomFragment: MvpAppCompatFragment(R.layout.fragment_metronom), Metron
         }
 
         // Слушатели для длительного нажатия на кнопку Уменьшить bpm
-        buttonDown.setOnClickListener{presenter.updateBpm(false, editTextBpm)}
+        buttonDown.setOnClickListener{
+            presenter.updateBpm(false, editTextBpm.text.toString())
+        }
         buttonDown.setOnLongClickListener {
             isTapping = true
             autoDown = true
@@ -140,16 +180,30 @@ class MetronomFragment: MvpAppCompatFragment(R.layout.fragment_metronom), Metron
 
         })
 
+        // Вызов всплывающего экрана с размером
+        imageButtonSize.setOnClickListener {
+            val intRes = arguments?.getInt(SheetSizeFragment.addDrawingKey)
+            findNavController().navigate(R.id.action_metronomFragment_to_sheetSizeFragment,
+            bundleOf(SheetSizeFragment.addDrawingKey to intRes))
+        }
+
+        //вызов всплывающего экрана с нотами
+        imageButtonDrawing.setOnClickListener {
+            findNavController().navigate(R.id.action_metronomFragment_to_sheetDrawingFragment,
+            bundleOf(SheetDrawingFragment.addSizeKey to textViewFractionSize.text))
+        }
+
     }
+
 
     // Внутренний класс, который нужен для долгого нажатия по кнопкам
     inner class bpmUpdater : Runnable {
         override fun run() {
             if (autoUp) {
-                presenter.updateBpm(true, editTextBpm)
+                presenter.updateBpm(true, editTextBpm.text.toString())
                 handler.postDelayed(bpmUpdater(), 50L)
             } else if (autoDown) {
-                presenter.updateBpm(false, editTextBpm)
+                presenter.updateBpm(false, editTextBpm.text.toString())
                 handler.postDelayed(bpmUpdater(), 50L)
             }
         }
