@@ -1,7 +1,9 @@
 package com.flycode.metronom
 
 import android.app.ProgressDialog.show
+import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.graphics.drawable.Drawable
 import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewTreeObserver
 import android.widget.*
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.graphics.drawable.toDrawable
@@ -20,6 +23,8 @@ import org.w3c.dom.Text
 import java.util.*
 import kotlin.properties.Delegates
 import kotlin.random.Random.Default.nextInt
+
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -40,9 +45,11 @@ var flag2: Boolean? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.getDefaultNightMode())
         textViewFractionSizeMain = findViewById(R.id.textViewFractionSize)
         flag = true
         flag2 = false
+
 
         //вызов всплывающего экрана с размером
         imageButtonSize = findViewById(R.id.imageButtonSize)
@@ -84,6 +91,7 @@ var flag2: Boolean? = null
         imageButtonSetting = findViewById(R.id.imageButtonSetting)
         imageButtonSetting?.setOnClickListener {
             this.startActivity(Intent(this, Setting::class.java))
+
         }
 
        //изменение сильная/слабая доля визуал
@@ -152,8 +160,6 @@ var flag2: Boolean? = null
             }
         }
     }
-
-
 
 
 
