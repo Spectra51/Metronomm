@@ -1,38 +1,70 @@
 package com.flycode.metronom.presenters
 
 import android.content.Context
-import android.text.Editable
-import android.widget.EditText
-import android.widget.Toast
-import androidx.core.view.isVisible
+import android.graphics.Color
+import android.os.Handler
+import android.os.Looper
 import com.flycode.metronom.fragments.MetronomFragment
 import com.flycode.metronom.model.Metronom
+import com.flycode.metronom.presenters.MetronomPresenter.const.MILLISECONDS_IN_SECOND
+import com.flycode.metronom.presenters.MetronomPresenter.const.SECONDS_IN_MINUTE
 import com.flycode.metronom.views.MetronomView
 import moxy.MvpPresenter
+import kotlin.concurrent.timerTask
 
 class MetronomPresenter: MvpPresenter<MetronomView>() {
 
-    val model = Metronom()
+    private val model = Metronom()
+
+    var nextQ: Int = 0 // номер доли (от 1 до 4), также это счётчик при 1-ой ноте
+    var doubleQ: Int = 0 // счётчик при 2-ой ноте
+    var quadQ: Int = 0 // счётчик при 3-ой ноте
+    private val handlerNoLight: Handler = Handler(Looper.getMainLooper()) // Handler для того, чтобы убирать подсветку долей
+    private val handlerTimeout: Handler = Handler(Looper.getMainLooper()) //
+
+    object const{
+        const val MILLISECONDS_IN_SECOND: Int = 1000
+        const val SECONDS_IN_MINUTE: Int = 60
+    }
 
     // Создание звука по таймеру
     fun createSoundTimer(context: Context){
-        model.createSoundTimer(context)
+        model.createSoundPool(context)
+        model.createTimer()
     }
 
     // Запуск метронома
-    fun playMetronom(bpm: Int){
-        model.playMetronom(bpm)
+    fun playMetronom(bpm: Int, selectNote1: Boolean, selectNote2: Boolean, selectNote3: Boolean, kBpm: Int){
+        // Запустим таймер
+        model.metronomTimer.schedule(
+            timerTask {
+                nextQ(selectNote1)
+                nextQ2(selectNote2)
+                nextQ3(selectNote3)
+                illuminationFractions()
+                model.soundPool.play(1,1f, 1f, 1, 0, 1f)
+            }, 0L, calculateSleepDuration(bpm*kBpm))
         viewState.isPlaying()
+    }
+
+    // Метод для подсчёта перерыва в секундах между ударами - считается из BPM
+    fun calculateSleepDuration(bpm: Int): Long {
+        return (MILLISECONDS_IN_SECOND * (SECONDS_IN_MINUTE / bpm.toFloat())).toLong()
     }
 
     // Пауза метронома
     fun pauseMetronom(){
-        model.pauseMetronom()
+        nextQ = 0
+        doubleQ = 0
+        quadQ = 0
+        illuminationButtonsOff()
+        model.pauseTimer()
         viewState.isPausing()
     }
 
+
     // Метод при нажатии кнопки Play
-    fun tapPlayButton(textBpm: String){
+    fun tapPlayButton(textBpm: String, selectNote1: Boolean, selectNote2: Boolean, selectNote3: Boolean, kBpm: Int){
         if (textBpm.isNotEmpty()) {
             val bpm = textBpm.toInt()
             if(bpm < MetronomFragment.const.MIN_BPM){
@@ -42,7 +74,7 @@ class MetronomPresenter: MvpPresenter<MetronomView>() {
                 viewState.showToast("Значение не может быть больше 240")
                 viewState.setEditTextBpm(MetronomFragment.const.MAX_BPM)
             } else{
-                playMetronom(bpm)
+                playMetronom(bpm, selectNote1, selectNote2, selectNote3, kBpm)
             }
         } else {
             viewState.showToast("Значение не может быть пустым")
@@ -75,13 +107,111 @@ class MetronomPresenter: MvpPresenter<MetronomView>() {
         }
     }
 
-    fun metronomDependEditText(imageViewPlayVisible: Boolean, textBpm: String, isTapping: Boolean){
-        if ((!imageViewPlayVisible && !isTapping) || (!imageViewPlayVisible && getCurrentBpm(textBpm)== MetronomFragment.const.MAX_BPM) ||
-            (!imageViewPlayVisible && getCurrentBpm(textBpm)== MetronomFragment.const.MIN_BPM)){
+    fun metronomDependEditText(imageViewPlayVisible: Boolean, textBpm: String, isTapping: Boolean
+                               , selectNote1: Boolean, selectNote2: Boolean, selectNote3: Boolean, kBpm: Int){
+        if ((!imageViewPlayVisible && !isTapping) || (!isTapping && !imageViewPlayVisible && getCurrentBpm(textBpm)== MetronomFragment.const.MAX_BPM) ||
+            (!isTapping && !imageViewPlayVisible && getCurrentBpm(textBpm)== MetronomFragment.const.MIN_BPM)){
             pauseMetronom()
+
             val bpm = getCurrentBpm(textBpm)
-            playMetronom(bpm)
+            playMetronom(bpm, selectNote1, selectNote2, selectNote3, kBpm)
+            /*
+            viewState.isPlaying()
+            handlerTimeout.postDelayed({
+                val bpm = getCurrentBpm(textBpm)
+                playMetronom(bpm, selectNote1, selectNote2, selectNote3, kBpm)
+            }, 300)
+
+             */
+
         }
+    }
+
+    // МЕТОДЫ ДЛЯ ПОДСВЕТКИ ДОЛЕЙ. Они установят nextQ, которая будет в методе illuminationButtons() менять цвет нужной доли
+    // Метод для выполнения тиков - 1 нота
+    private fun nextQ (selectNote1: Boolean) {
+        if(selectNote1) {
+            nextQ += 1
+            if (nextQ == 5) nextQ = 1
+        }else{
+            nextQ = 0
+        }
+    }
+
+    // Метод для выполнения тиков - 2 нота
+    private fun nextQ2 (selectNote2: Boolean) {
+        if(selectNote2){
+            doubleQ += 1
+            if (doubleQ == 9) doubleQ = 1
+            when(doubleQ){
+                1 -> nextQ = 1
+                2 -> nextQ = 1
+                3 -> nextQ = 2
+                4 -> nextQ = 2
+                5 -> nextQ = 3
+                6 -> nextQ = 3
+                7 -> nextQ = 4
+                8 -> nextQ = 4
+            }
+        }else{
+            doubleQ = 0
+        }
+
+    }
+
+    // Метод для выполнения тиков - 3 нота
+    private fun nextQ3 (selectNote3: Boolean){
+        if (selectNote3){
+            quadQ +=1
+            if(quadQ == 17) quadQ = 1
+            when(quadQ){
+                1 -> nextQ = 1
+                2 -> nextQ = 1
+                3 -> nextQ = 1
+                4 -> nextQ = 1
+                5 -> nextQ = 2
+                6 -> nextQ = 2
+                7 -> nextQ = 2
+                8 -> nextQ = 2
+                9 -> nextQ = 3
+                10 -> nextQ = 3
+                11 -> nextQ = 3
+                12 -> nextQ = 3
+                13 -> nextQ = 4
+                14 -> nextQ = 4
+                15 -> nextQ = 4
+                16 -> nextQ = 4
+            }
+        }else{
+            quadQ = 0
+        }
+    }
+
+    // Метод для управления подсветкой
+    private  fun illuminationFractions () {
+
+        // Подсветим наши доли белым цветом
+        if (nextQ == 1) viewState.setColorFraction1(Color.parseColor("#FFFFFF"))
+        if (nextQ == 2) viewState.setColorFraction2(Color.parseColor("#FFFFFF"))
+        if (nextQ == 3) viewState.setColorFraction3(Color.parseColor("#FFFFFF"))
+        if (nextQ == 4) viewState.setColorFraction4(Color.parseColor("#FFFFFF"))
+
+        // Уберём подсветку, изменив цвет на серый
+        handlerNoLight.postDelayed({
+            if (nextQ == 1) viewState.setColorFraction1(Color.parseColor("#424242"))
+            if (nextQ == 2) viewState.setColorFraction2(Color.parseColor("#424242"))
+            if (nextQ == 3) viewState.setColorFraction3(Color.parseColor("#424242"))
+            if (nextQ == 4) viewState.setColorFraction4(Color.parseColor("#424242"))
+        }, 50)
+
+    }
+
+    // Метод для сброса подсветки всех долей
+    private fun  illuminationButtonsOff () {
+        viewState.setColorFraction1(Color.parseColor("#424242"))
+        viewState.setColorFraction2(Color.parseColor("#424242"))
+        viewState.setColorFraction3(Color.parseColor("#424242"))
+        viewState.setColorFraction4(Color.parseColor("#424242"))
     }
 
 }

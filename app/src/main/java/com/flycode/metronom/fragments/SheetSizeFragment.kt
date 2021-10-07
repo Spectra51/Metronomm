@@ -19,7 +19,6 @@ class SheetSizeFragment: BottomSheetDialogFragment() {
 
     companion object{
         const val sizeKey = "SIZE_KEY"
-        const val addDrawingKey = "ADD_DRAWING_KEY"
     }
 
     lateinit var textSize2: TextView
@@ -37,25 +36,25 @@ class SheetSizeFragment: BottomSheetDialogFragment() {
         textSize3 = view.findViewById(R.id.txt_3)
         textSize4 = view.findViewById(R.id.txt_4)
 
-        val resourceNote = arguments?.getInt(addDrawingKey)
-        Log.i("My", "${resourceNote}")
-
         textSize2.setOnClickListener {
-            findNavController().navigate(R.id.action_sheetSizeFragment_to_metronomFragment,
-            bundleOf(sizeKey to "2/4", addDrawingKey to resourceNote)
-            )
+            findNavController().previousBackStackEntry?.savedStateHandle?.apply {
+                this.set(sizeKey, "2/4")
+            }
+            findNavController().popBackStack()
         }
 
         textSize3.setOnClickListener {
-            findNavController().navigate(R.id.action_sheetSizeFragment_to_metronomFragment,
-                bundleOf(sizeKey to "3/4", addDrawingKey to resourceNote)
-            )
+            findNavController().previousBackStackEntry?.savedStateHandle?.apply {
+                this.set(sizeKey, "3/4")
+            }
+            findNavController().popBackStack()
         }
 
         textSize4.setOnClickListener {
-            findNavController().navigate(R.id.action_sheetSizeFragment_to_metronomFragment,
-                bundleOf(sizeKey to "4/4", addDrawingKey to resourceNote)
-            )
+            findNavController().previousBackStackEntry?.savedStateHandle?.apply {
+                this.set(sizeKey, "4/4")
+            }
+            findNavController().popBackStack()
         }
     }
 

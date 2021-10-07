@@ -10,4 +10,5 @@
     <color name= "seek_progress"> #18a7b5 </color>
     <color name= "seek_background">#504F4F</color>
     <color name = "main">#373737</color>
+    <color name="noLight">#FF424242</color>
 </resources>

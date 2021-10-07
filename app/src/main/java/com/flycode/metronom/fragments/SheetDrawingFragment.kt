@@ -16,7 +16,6 @@ class SheetDrawingFragment: BottomSheetDialogFragment() {
 
     companion object{
         const val drawingKey = "DRAWING_KEY"
-        const val addSizeKey = "ADD_SIZE_KEY"
     }
 
     lateinit var imageViewNote1: ImageView
@@ -34,32 +33,35 @@ class SheetDrawingFragment: BottomSheetDialogFragment() {
         imageViewNote2 = view.findViewById(R.id.imageViewNote2)
         imageViewNote3 = view.findViewById(R.id.imageViewNote3)
 
-        val size = arguments?.getString(addSizeKey).toString()
-
+        // Нажатие на 1-ю ноту
         imageViewNote1.setOnClickListener {
-            //получаем предыдущий фрагментв стеке
-            // берем обработчик его состояни и меняет его значение под выбранным ключем ключ
-            // (в том фрагменте данные поменются даже если не вызвать findNavController().popBackStack())
-            // для наглядности только тут не вызываем его
+            // previousBackStackEntry - получаем предыдущий фрагмент (главный фрагмент) в стеке
+            // savedStateHandle - берем обработчик состояния фрагмента и меняем его значение под выбранным ключем
+            // (в главном фрагменте данные поменяются даже если не вызвать findNavController().popBackStack())
+            // popBackStack() - шаг назад (с фрагментами)
             findNavController().previousBackStackEntry?.savedStateHandle?.apply {
                 this.set(drawingKey,R.drawable.note11)
-                this.set(addSizeKey,size)
-            }
-//            findNavController().popBackStack()
-        }
-
-        imageViewNote2.setOnClickListener {
-            findNavController().previousBackStackEntry?.savedStateHandle?.apply {
-                this.set(drawingKey,R.drawable.note22)
-                this.set(addSizeKey,size)
             }
             findNavController().popBackStack()
         }
 
+        // Нажатие на 2-ю ноту
+        imageViewNote2.setOnClickListener {
+            findNavController().previousBackStackEntry?.savedStateHandle?.apply {
+                this.set(drawingKey,R.drawable.note22)
+            }
+            findNavController().popBackStack()
+        }
+
+        // Нажатие на 3-ю ноту
         imageViewNote3.setOnClickListener {
             findNavController().previousBackStackEntry?.savedStateHandle?.apply {
                 this.set(drawingKey,R.drawable.note33)
-                this.set(addSizeKey,size)
+                /*this.set(selectNoteKey1, false)
+                this.set(selectNoteKey2, false)
+                this.set(selectNoteKey3, true)
+                this.set(kBpmKey, 250)
+                 */
             }
             findNavController().popBackStack()
         }

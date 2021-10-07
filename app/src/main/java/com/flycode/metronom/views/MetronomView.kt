@@ -12,4 +12,12 @@ interface MetronomView : MvpView {
     fun showToast(toast: String)
     @AddToEndSingle
     fun setEditTextBpm(bpm: Int)
+    @AddToEndSingle
+    fun setColorFraction1(color: Int)
+    @AddToEndSingle
+    fun setColorFraction2(color: Int)
+    @AddToEndSingle
+    fun setColorFraction3(color: Int)
+    @AddToEndSingle
+    fun setColorFraction4(color: Int)
 }
