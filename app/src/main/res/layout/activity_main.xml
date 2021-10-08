@@ -36,7 +36,7 @@
             android:paddingEnd="5dp"
             android:paddingRight="5dp"
             android:paddingBottom="5dp"
-            app:srcCompat="@drawable/rec1" />
+            app:srcCompat="@drawable/rec3" />
 
         <ImageButton
             android:id="@+id/imageButtonFraction2"
@@ -133,7 +133,6 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="200dp"
         android:fontFamily="@font/ubuntu"
-        style="@style/SecondaryText"
         android:text="Metronome"
         android:textColor="@color/white"
         android:textSize="20sp"
@@ -195,7 +194,6 @@
         android:backgroundTint="@color/cardview_dark_background"
         android:cursorVisible="false"
         android:fontFamily="@font/ubuntu"
-        style="@style/SecondaryText"
         android:inputType="number"
         android:nestedScrollingEnabled="false"
         android:selectAllOnFocus="false"
@@ -215,7 +213,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/ubuntu"
-        style="@style/SecondaryText"
         android:gravity="center"
         android:text="Размер"
         android:textColor="@color/white"
@@ -249,7 +246,6 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:fontFamily="@font/ubuntu"
-        style="@style/SecondaryText"
         android:text="2/4"
         android:textColor="@color/white"
         android:textSize="20sp"
@@ -265,7 +261,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/ubuntu"
-        style="@style/SecondaryText"
         android:gravity="center"
         android:text="Рисунок"
         android:textColor="@color/white"

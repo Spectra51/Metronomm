@@ -45,7 +45,7 @@ var flag2: Boolean? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.getDefaultNightMode())
+     //   AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.getDefaultNightMode())
         textViewFractionSizeMain = findViewById(R.id.textViewFractionSize)
         flag = true
         flag2 = false
@@ -104,11 +104,11 @@ var flag2: Boolean? = null
         imageButtonFraction1?.setOnClickListener {
 
             if (flag!!) {
-                imageButtonFraction1!!.setImageResource(R.drawable.rec1)
+                imageButtonFraction1!!.setImageResource(R.drawable.rec3)
                 flag = false
                 flag2 = false
             }else if (flag2!!){
-                imageButtonFraction1!!.setImageResource(R.drawable.rec3)
+                imageButtonFraction1!!.setImageResource(R.drawable.rec1)
                 flag = true }
             else{
                 imageButtonFraction1!!.setImageResource(R.drawable.rec2)
@@ -120,11 +120,11 @@ var flag2: Boolean? = null
 
         imageButtonFraction2?.setOnClickListener {
             if (flag!!) {
-                imageButtonFraction2!!.setImageResource(R.drawable.rec1)
+                imageButtonFraction2!!.setImageResource(R.drawable.rec3)
                 flag = false
                 flag2 = false
             }else if (flag2!!){
-                imageButtonFraction2!!.setImageResource(R.drawable.rec3)
+                imageButtonFraction2!!.setImageResource(R.drawable.rec1)
                 flag = true }
             else{
                 imageButtonFraction2!!.setImageResource(R.drawable.rec2)
@@ -134,11 +134,11 @@ var flag2: Boolean? = null
 
         imageButtonFraction3?.setOnClickListener {
             if (flag!!) {
-                imageButtonFraction3!!.setImageResource(R.drawable.rec1)
+                imageButtonFraction3!!.setImageResource(R.drawable.rec3)
                 flag = false
                 flag2 = false
             }else if (flag2!!){
-                imageButtonFraction3!!.setImageResource(R.drawable.rec3)
+                imageButtonFraction3!!.setImageResource(R.drawable.rec1)
                 flag = true }
             else{
                 imageButtonFraction3!!.setImageResource(R.drawable.rec2)
@@ -148,11 +148,11 @@ var flag2: Boolean? = null
 
         imageButtonFraction4?.setOnClickListener {
             if (flag!!) {
-                imageButtonFraction4!!.setImageResource(R.drawable.rec1)
+                imageButtonFraction4!!.setImageResource(R.drawable.rec3)
                 flag = false
                 flag2 = false
             } else if (flag2!!) {
-                imageButtonFraction4!!.setImageResource(R.drawable.rec3)
+                imageButtonFraction4!!.setImageResource(R.drawable.rec1)
                 flag = true
             } else {
                 imageButtonFraction4!!.setImageResource(R.drawable.rec2)

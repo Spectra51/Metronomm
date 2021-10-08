@@ -26,15 +26,15 @@ class Setting: AppCompatActivity()  {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.setting)
-        initThemeListener()
-        initTheme()
+      //  initThemeListener()
+       // initTheme()
         imageButtonClose = findViewById(R.id.imageButtonClose)
         imageButtonClose?.setOnClickListener {
             this.startActivity(Intent(this, MainActivity::class.java))
         }
 
     }
-
+/*
 //смена темы
 
     fun initThemeListener(){
@@ -70,6 +70,6 @@ class Setting: AppCompatActivity()  {
     fun getSavedTheme() = sharedPrefs.getInt(KEY_THEME, THEME_UNDEFINED)
 
 
-
+*/
 
 }
