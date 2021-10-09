@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Projects/Metronom/app/src/main/res/layout/fragment_metronom.xml" value="0.2427536231884058" />
+        <entry key="..\:/Projects/Metronom/app/src/main/res/layout/fragment_settings.xml" value="0.23822463768115942" />
+        <entry key="..\:/Projects/Metronom/app/src/main/res/layout/fragment_size.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Vadim/AndroidStudioProjects/Metronomm/app/src/main/res/drawable/btn_play.xml" value="0.34444444444444444" />
         <entry key="..\:/Users/Vadim/AndroidStudioProjects/Metronomm/app/src/main/res/drawable/seek_bar.xml" value="0.34444444444444444" />
         <entry key="..\:/Users/Vadim/AndroidStudioProjects/Metronomm/app/src/main/res/drawable/seekbar.xml" value="0.34444444444444444" />

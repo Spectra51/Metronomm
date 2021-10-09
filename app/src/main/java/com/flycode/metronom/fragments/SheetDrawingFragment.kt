@@ -57,11 +57,6 @@ class SheetDrawingFragment: BottomSheetDialogFragment() {
         imageViewNote3.setOnClickListener {
             findNavController().previousBackStackEntry?.savedStateHandle?.apply {
                 this.set(drawingKey,R.drawable.note33)
-                /*this.set(selectNoteKey1, false)
-                this.set(selectNoteKey2, false)
-                this.set(selectNoteKey3, true)
-                this.set(kBpmKey, 250)
-                 */
             }
             findNavController().popBackStack()
         }

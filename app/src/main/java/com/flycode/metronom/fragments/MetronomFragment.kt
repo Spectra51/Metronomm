@@ -4,10 +4,12 @@ import android.content.res.ColorStateList
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
 import android.widget.*
 import androidx.core.view.isVisible
+import androidx.core.view.setPadding
 import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.findNavController
 import com.flycode.metronom.R
@@ -28,20 +30,23 @@ class MetronomFragment: MvpAppCompatFragment(R.layout.fragment_metronom), Metron
         const val MAX_BPM: Int = 240 // максимальное bpm
     }
 
-    private var autoUp: Boolean = false // переменные для автоматического увеличения bpm при долгом нажатии на кнопки увеличить и уменьшить
+    private var autoUp: Boolean = false // переменные для автоматического увеличения bpm при долгом нажатии на кнопки Увеличить bpm и Уменьшить bpm
     private var autoDown: Boolean = false
-    private var isTapping: Boolean = false // переменная обозначает, нажимаем ли мы на сикбар или кнопки увеличить bpm и уменьшить bpm
+    private var isTapping: Boolean = false // переменная обозначает, нажимаем ли мы на сикбар или кнопки Увеличить bpm и Уменьшить bpm
 
-    private var kBpm = 1
+    private var kBpm = 1 // коэффициент для bpm - нужен для зависимости bpm от выбранной ноты
     private var selectNote1: Boolean = true // переменная true, когда нажимаем на выбранный рисунок с нотой
     private var selectNote2: Boolean = false
     private var selectNote3: Boolean = false
 
-    lateinit var imageViewPlay: ImageView // кнопка play
-    lateinit var imageViewPause: ImageView // кнопка pause
+    private var fractions: Int = 2
+    private var tripleSize: Boolean = false
+
+    lateinit var imageViewPlay: ImageView // кнопка Play
+    lateinit var imageViewPause: ImageView // кнопка Pause
     lateinit var editTextBpm: EditText // поле для ввода bpm
-    lateinit var buttonUp: ImageButton // кнопка увеличить bpm
-    lateinit var buttonDown: ImageButton // кнопка уменьшить bpm
+    lateinit var buttonUp: ImageButton // кнопка Увеличить bpm
+    lateinit var buttonDown: ImageButton // кнопка Уменьшить bpm
     lateinit var textViewMetronome: TextView // текст названия приложения
     lateinit var seekBarBpm: SeekBar // сикбар
     lateinit var imageButtonSize: ImageButton // кнопка размер
@@ -52,9 +57,14 @@ class MetronomFragment: MvpAppCompatFragment(R.layout.fragment_metronom), Metron
     lateinit var imageButtonFraction2: ImageButton
     lateinit var imageButtonFraction3: ImageButton
     lateinit var imageButtonFraction4: ImageButton
+    lateinit var imageButtonCircle: ImageButton // круг вокруг кнопки Play и Pause
+    lateinit var imageButtonSetting: ImageButton // кнопка Настройки
+
+    //var pxSizePadding25 = 0 // Отступ в px для imageButtonCircle - делаем размер в пикселях из 25dp и 30dp
+    //var pxSizePadding30 = 0
 
     val handlerTimeout = Handler(Looper.getMainLooper()) // Handler для задержки после переключения рисунка
-    lateinit var handlerLongTap: Handler // Handler для долгого нажатия долгого нажатия по кнопкам Увеличить bpm и Уменьшить bpm
+    val handlerLongTap = Handler(Looper.getMainLooper()) // Handler для долгого нажатия долгого нажатия по кнопкам Увеличить bpm и Уменьшить bpm
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -75,6 +85,8 @@ class MetronomFragment: MvpAppCompatFragment(R.layout.fragment_metronom), Metron
         imageButtonFraction4 = view.findViewById(R.id.imageButtonFraction4)
         textViewFractionSize = view.findViewById(R.id.textViewFractionSize)
         imageViewDrawingNotes = view.findViewById(R.id.imageViewDrawingNotes)
+        imageButtonCircle = view.findViewById(R.id.imageButtonCircle)
+        imageButtonSetting = view.findViewById(R.id.imageButtonSetting)
 
         // currentBackStackEntry - получаем текущий фрагмент в стеке, чтобы изменять элементы в данном фрагменте
         // savedStateHandle - берем обработчик состояния фрагмента
@@ -107,7 +119,7 @@ class MetronomFragment: MvpAppCompatFragment(R.layout.fragment_metronom), Metron
                     presenter.pauseMetronom()
                     isPlaying()
                     handlerTimeout.postDelayed({
-                        presenter.playMetronom(bpm, selectNote1, selectNote2, selectNote3, kBpm)
+                        presenter.playMetronom(bpm, selectNote1, selectNote2, selectNote3, kBpm, tripleSize, fractions)
                     }, 300)
                 }
             }
@@ -115,26 +127,60 @@ class MetronomFragment: MvpAppCompatFragment(R.layout.fragment_metronom), Metron
         findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<String>(sizeKey)
             ?.observe(viewLifecycleOwner){
                 textViewFractionSize.text = it
-            }
-        //
+                val bpm = editTextBpm.text.toString().toInt()
 
+                if (it == "2/4"){
+                    tripleSize = false
+                    fractions = 2
+                    imageButtonFraction1.visibility = View.VISIBLE
+                    imageButtonFraction2.visibility = View.VISIBLE
+                    imageButtonFraction3.visibility = View.GONE
+                    imageButtonFraction4.visibility = View.GONE
+                }else if (it == "3/4"){
+                    tripleSize = true
+                    fractions = 3
+                    imageButtonFraction1.visibility = View.VISIBLE
+                    imageButtonFraction2.visibility = View.VISIBLE
+                    imageButtonFraction3.visibility = View.VISIBLE
+                    imageButtonFraction4.visibility = View.GONE
+                } else{
+                    tripleSize = false
+                    fractions = 4
+                    imageButtonFraction1.visibility = View.VISIBLE
+                    imageButtonFraction2.visibility = View.VISIBLE
+                    imageButtonFraction3.visibility = View.VISIBLE
+                    imageButtonFraction4.visibility = View.VISIBLE
+                }
+
+                if (!imageViewPlay.isVisible){
+                    presenter.pauseMetronom()
+                    isPlaying()// лох
+                    handlerTimeout.postDelayed({
+                        presenter.playMetronom(bpm, selectNote1, selectNote2, selectNote3, kBpm, tripleSize, fractions)
+                    }, 300)
+                }
+
+            }
+
+        // Делаем из dp пиксели
+        //pxSizePadding25 = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 25F, context?.getResources()?.getDisplayMetrics()).toInt()
+        //pxSizePadding30 = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 30F, context?.getResources()?.getDisplayMetrics()).toInt()
 
         // В самом начале создаём таймер и soundPool
         presenter.createSoundTimer(requireContext())
 
-        handlerLongTap = Handler(Looper.getMainLooper())
-
         // Ставим прослушиватель на editTextBpm, чтобы bpm изменялся при изменении поля editTextBpm
         editTextBpm.addTextChangedListener {
             val textBpm = editTextBpm.text.toString()
-            presenter.metronomDependEditText(imageViewPlay.isVisible, textBpm, isTapping, selectNote1, selectNote2, selectNote3, kBpm)
             seekBarBpm.setProgress(presenter.getCurrentBpm(textBpm)- MIN_BPM)
+            presenter.metronomDependEditText(imageViewPlay.isVisible, textBpm, isTapping, selectNote1, selectNote2, selectNote3, kBpm,
+                tripleSize, fractions)
         }
 
         // Ставим прослушиватель на кнопку Play для запуска метронома
         imageViewPlay.setOnClickListener {
             val textBpm=  editTextBpm.text.toString()
-            presenter.tapPlayButton(textBpm, selectNote1, selectNote2, selectNote3, kBpm)
+            presenter.tapPlayButton(textBpm, selectNote1, selectNote2, selectNote3, kBpm, tripleSize, fractions)
         }
         // Ставим прослушиватель на кнопку Pause для паузы метронома
         imageViewPause.setOnClickListener {
@@ -143,7 +189,15 @@ class MetronomFragment: MvpAppCompatFragment(R.layout.fragment_metronom), Metron
 
         // Слушатели для длительного нажатия на кнопку Увеличить bpm
         buttonUp.setOnClickListener {
-            presenter.updateBpm(true, editTextBpm.text.toString())
+            //presenter.updateBpm(true, editTextBpm.text.toString())
+
+            presenter.pauseMetronom()
+            isPlaying()
+            val bpm = editTextBpm.text.toString().toInt()
+            handlerTimeout.postDelayed({
+                presenter.playMetronom(bpm, selectNote1, selectNote2,selectNote3,kBpm,tripleSize,fractions)
+                presenter
+            }, 300)
         }
         buttonUp.setOnLongClickListener {
             isTapping = true
@@ -163,7 +217,7 @@ class MetronomFragment: MvpAppCompatFragment(R.layout.fragment_metronom), Metron
 
         // Слушатели для длительного нажатия на кнопку Уменьшить bpm
         buttonDown.setOnClickListener{
-            presenter.updateBpm(false, editTextBpm.text.toString())
+            //presenter.updateBpm(false, editTextBpm.text.toString())
         }
         buttonDown.setOnLongClickListener {
             isTapping = true
@@ -208,9 +262,14 @@ class MetronomFragment: MvpAppCompatFragment(R.layout.fragment_metronom), Metron
             findNavController().navigate(R.id.action_metronomFragment_to_sheetSizeFragment)
         }
 
-        //вызов всплывающего экрана с нотами
+        // Вызов всплывающего экрана с нотами
         imageButtonDrawing.setOnClickListener {
             findNavController().navigate(R.id.action_metronomFragment_to_sheetDrawingFragment)
+        }
+
+        // Вызов настроек
+        imageButtonSetting.setOnClickListener {
+            findNavController().navigate(R.id.action_metronomFragment_to_settingsFragment)
         }
 
     }
@@ -261,6 +320,12 @@ class MetronomFragment: MvpAppCompatFragment(R.layout.fragment_metronom), Metron
     override fun setColorFraction4(color: Int) {
         imageButtonFraction4.backgroundTintList = ColorStateList.valueOf(color)
     }
+
+/*
+    override fun setCirclePadding25() {imageButtonCircle.setPadding(pxSizePadding25)}
+    override fun setCirclePadding30() {imageButtonCircle.setPadding(pxSizePadding30)}
+ */
+
 }
 
 

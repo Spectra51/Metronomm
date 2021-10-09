@@ -20,4 +20,8 @@ interface MetronomView : MvpView {
     fun setColorFraction3(color: Int)
     @AddToEndSingle
     fun setColorFraction4(color: Int)
+    //@AddToEndSingle // Для пульсации - 4 строки
+    //fun setCirclePadding25()
+    //@AddToEndSingle
+    //fun setCirclePadding30()
 }

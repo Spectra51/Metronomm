@@ -14,21 +14,20 @@
         <action
             android:id="@+id/action_metronomFragment_to_sheetDrawingFragment"
             app:destination="@id/sheetDrawingFragment" />
+        <action
+            android:id="@+id/action_metronomFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <dialog
         android:id="@+id/sheetSizeFragment"
         android:name="com.flycode.metronom.fragments.SheetSizeFragment"
-        android:label="SheetSizeFragment" >
-        <action
-            android:id="@+id/action_sheetSizeFragment_to_metronomFragment"
-            app:destination="@id/metronomFragment" />
-    </dialog>
+        android:label="SheetSizeFragment" />
     <dialog
         android:id="@+id/sheetDrawingFragment"
         android:name="com.flycode.metronom.fragments.SheetDrawingFragment"
-        android:label="SheetDrawingFragment" >
-        <action
-            android:id="@+id/action_sheetDrawingFragment_to_metronomFragment"
-            app:destination="@id/metronomFragment" />
-    </dialog>
+        android:label="SheetDrawingFragment" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.flycode.metronom.fragments.SettingsFragment"
+        android:label="SettingsFragment" />
 </navigation>

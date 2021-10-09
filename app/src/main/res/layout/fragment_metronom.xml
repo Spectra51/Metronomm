@@ -16,6 +16,7 @@
         android:layout_marginEnd="70dp"
         android:layout_marginBottom="40dp"
         android:orientation="horizontal"
+        android:gravity="center"
         app:layout_constraintBottom_toTopOf="@+id/textViewSize"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.4"
@@ -34,7 +35,7 @@
             android:paddingEnd="5dp"
             android:paddingRight="5dp"
             android:paddingBottom="5dp"
-            app:srcCompat="@drawable/rec1" />
+            app:srcCompat="@drawable/rec3" />
 
         <ImageButton
             android:id="@+id/imageButtonFraction2"
@@ -62,6 +63,7 @@
             android:paddingEnd="5dp"
             android:paddingRight="5dp"
             android:paddingBottom="5dp"
+            android:visibility="gone"
             app:srcCompat="@drawable/rec2" />
 
         <ImageButton
@@ -76,6 +78,7 @@
             android:paddingEnd="5dp"
             android:paddingRight="5dp"
             android:paddingBottom="5dp"
+            android:visibility="gone"
             app:srcCompat="@drawable/rec2" />
 
 
@@ -108,7 +111,7 @@
         app:srcCompat="@drawable/note11" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/imageButtonCircle"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="100dp"
@@ -153,11 +156,11 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButtonCircle"
+        app:layout_constraintEnd_toEndOf="@+id/imageButtonCircle"
         app:layout_constraintHorizontal_bias="0.533"
-        app:layout_constraintStart_toStartOf="@+id/imageButton"
-        app:layout_constraintTop_toTopOf="@+id/imageButton"
+        app:layout_constraintStart_toStartOf="@+id/imageButtonCircle"
+        app:layout_constraintTop_toTopOf="@+id/imageButtonCircle"
         app:srcCompat="@drawable/play" />
 
 
@@ -186,10 +189,10 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton"
-        app:layout_constraintStart_toStartOf="@+id/imageButton"
-        app:layout_constraintTop_toTopOf="@+id/imageButton"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButtonCircle"
+        app:layout_constraintEnd_toEndOf="@+id/imageButtonCircle"
+        app:layout_constraintStart_toStartOf="@+id/imageButtonCircle"
+        app:layout_constraintTop_toTopOf="@+id/imageButtonCircle"
         app:layout_constraintVertical_bias="0.514"
         app:srcCompat="@drawable/pause" />
 
