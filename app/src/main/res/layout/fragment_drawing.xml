@@ -8,7 +8,7 @@
     android:orientation="vertical"
     app:behavior_hideable="true"
     app:behavior_peekHeight="0dp"
-    android:background="@color/cardview_dark_background">
+    android:background="@color/cardview_background">
 
 
     <ScrollView
@@ -68,7 +68,7 @@
         android:fontFamily="@font/ubuntu"
         android:gravity="center"
         android:text="Рисунок"
-        android:textColor="@color/white"
+        android:textColor="@color/text_color"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/view2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -81,7 +81,7 @@
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:layout_marginTop="60dp"
-        android:background="#808080"
+        android:background="@color/text_size_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"

@@ -10,6 +10,10 @@
     <color name= "seek_progress"> #18a7b5 </color>
     <color name= "seek_background">#504F4F</color>
     <color name = "main">#373737</color>
-    <color name="noLight">#FF424242</color>
-    <color name="backgraund_layaut">#373737</color>
+    <color name= "noLight">#FF424242</color>
+    <color name= "background_layout">#FFFFFFFF</color>
+    <color name="text_color">#404040</color>
+    <color name="text_size_color">#FF000000</color>
+    <color name="cardview_dark_background">#FF424242</color>
+    <color name="cardview_background">#FFFFFFFF</color>
 </resources>

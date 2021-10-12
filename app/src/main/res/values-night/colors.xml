@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name= "seek_progress"> #18a7b5 </color>
+    <color name= "seek_background">#504F4F</color>
+    <color name = "main">#373737</color>
+    <color name= "noLight">#FF424242</color>
+    <color name= "background_layout">#373737</color>
+    <color name="text_color">#FFFFFFFF</color>
+    <color name="text_size_color">#808080</color>
+    <color name="cardview_background">#FF424242</color>
+</resources>

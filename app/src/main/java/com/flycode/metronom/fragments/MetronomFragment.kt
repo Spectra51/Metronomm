@@ -4,10 +4,12 @@ import android.content.res.ColorStateList
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.isVisible
 import androidx.core.view.setPadding
 import androidx.core.widget.addTextChangedListener
@@ -16,6 +18,7 @@ import com.flycode.metronom.R
 import com.flycode.metronom.fragments.MetronomFragment.const.MIN_BPM
 import com.flycode.metronom.fragments.SheetDrawingFragment.Companion.drawingKey
 import com.flycode.metronom.fragments.SheetSizeFragment.Companion.sizeKey
+import com.flycode.metronom.model.SharedPref
 import com.flycode.metronom.presenters.MetronomPresenter
 import com.flycode.metronom.views.MetronomView
 import moxy.MvpAppCompatFragment
@@ -84,6 +87,12 @@ class MetronomFragment: MvpAppCompatFragment(R.layout.fragment_metronom), Metron
         imageViewDrawingNotes = view.findViewById(R.id.imageViewDrawingNotes)
         imageButtonCircle = view.findViewById(R.id.imageButtonCircle)
         imageButtonSetting = view.findViewById(R.id.imageButtonSetting)
+
+        // Тёмная тема
+        if (SharedPref(requireContext()).getPreferences()){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            Log.i("My", "check start")
+        }
 
         // currentBackStackEntry - получаем текущий фрагмент в стеке, чтобы изменять элементы в данном фрагменте
         // savedStateHandle - берем обработчик состояния фрагмента
@@ -162,10 +171,6 @@ class MetronomFragment: MvpAppCompatFragment(R.layout.fragment_metronom), Metron
                 }
 
             }
-
-        // Делаем из dp пиксели
-        //pxSizePadding25 = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 25F, context?.getResources()?.getDisplayMetrics()).toInt()
-        //pxSizePadding30 = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 30F, context?.getResources()?.getDisplayMetrics()).toInt()
 
         // В самом начале создаём таймер и soundPool
         presenter.createSoundTimer(requireContext())

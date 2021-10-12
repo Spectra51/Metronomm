@@ -8,7 +8,7 @@
     android:orientation="vertical"
     app:behavior_hideable="true"
     app:behavior_peekHeight="0dp"
-    android:background="@color/cardview_dark_background">
+    android:background="@color/cardview_background">
 
 
     <ScrollView
@@ -43,7 +43,7 @@
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
                 android:text="2"
-                android:textColor="#808080"
+                android:textColor="@color/text_size_color"
                 android:textSize="20sp" />
 
             <TextView
@@ -55,7 +55,7 @@
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
                 android:text="3"
-                android:textColor="#808080"
+                android:textColor="@color/text_size_color"
                 android:textSize="20sp" />
 
             <TextView
@@ -65,7 +65,7 @@
                 android:fontFamily="@font/ubuntu"
                 android:gravity="left"
                 android:text="4"
-                android:textColor="#808080"
+                android:textColor="@color/text_size_color"
                 android:textSize="20sp" />
         </LinearLayout>
     </ScrollView>
@@ -79,7 +79,7 @@
         android:fontFamily="@font/ubuntu"
         android:gravity="center"
         android:text="Размер"
-        android:textColor="@color/white"
+        android:textColor="@color/text_color"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/scrollView2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -92,7 +92,7 @@
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:layout_marginTop="60dp"
-        android:background="#808080"
+        android:background="@color/text_size_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -110,7 +110,7 @@
         android:gravity="right"
         android:paddingTop="5dp"
         android:text="/  4"
-        android:textColor="@color/white"
+        android:textColor="@color/text_color"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
