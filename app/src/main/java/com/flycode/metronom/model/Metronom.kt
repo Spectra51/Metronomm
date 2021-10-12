@@ -31,8 +31,10 @@ class Metronom {
                     .build()
             )
             .build()
-        // Положим в SoundPool наш звук
+        // Положим в SoundPool наши звуки (при одновременном плее из 2-х звуков воспроизводится тот, у которого выше приоритет)
         soundPool.load(context, R.raw.metronom, 1)
+        soundPool.load(context,R.raw.metronom_strong,2)
+
     }
 
     // Метод для создания таймера

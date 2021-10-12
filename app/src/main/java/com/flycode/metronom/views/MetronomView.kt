@@ -13,11 +13,19 @@ interface MetronomView : MvpView {
     @AddToEndSingle
     fun setEditTextBpm(bpm: Int)
     @AddToEndSingle
-    fun setColorFraction1(color: Int)
+    fun setColorFraction1(resId: Int)
     @AddToEndSingle
-    fun setColorFraction2(color: Int)
+    fun setColorFraction2(resId: Int)
     @AddToEndSingle
-    fun setColorFraction3(color: Int)
+    fun setColorFraction3(resId: Int)
     @AddToEndSingle
-    fun setColorFraction4(color: Int)
+    fun setColorFraction4(resId: Int)
+    @AddToEndSingle
+    fun setButtonPicture1(resId: Int)
+    @AddToEndSingle
+    fun setButtonPicture2(resId: Int)
+    @AddToEndSingle
+    fun setButtonPicture3(resId: Int)
+    @AddToEndSingle
+    fun setButtonPicture4(resId: Int)
 }

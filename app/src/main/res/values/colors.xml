@@ -11,4 +11,5 @@
     <color name= "seek_background">#504F4F</color>
     <color name = "main">#373737</color>
     <color name="noLight">#FF424242</color>
+    <color name="backgraund_layaut">#373737</color>
 </resources>
